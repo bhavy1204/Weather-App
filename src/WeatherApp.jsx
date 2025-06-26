@@ -22,8 +22,8 @@ export default function WeatherApp() {
     }
 
     return (
-        <div className="weatherApp">
-            <h2>My first react project</h2>
+        <div className={`weatherApp`}>
+            <h2><i>forCast</i> </h2>
             <SearchBox updateInfo={updateInfo} />
             <InfoBox info={weatherInfo} />
         </div>

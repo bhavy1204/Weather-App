@@ -38,7 +38,7 @@ export default function InfoBox({ info }) {
                             <p>humidity: {info.humidity} </p>
                             <p>Max. temperature {info.tempMax}&deg;C</p>
                             <p>Min. temperature {info.tempMin}&deg;C</p>
-                            <p>The weather can be described as <i>{info.weather}</i> and feels like {info.feelsLike}&deg;C</p>
+                            <p>"The weather can be described as <i>{info.weather}</i> and feels like {info.feelsLike}&deg;C"</p>
                             <p>Sunrise: {convertUnixToTime(info.sunrise)}</p>
                             <p>Sunset: {convertUnixToTime(info.sunset)}</p>
                         </Typography>
