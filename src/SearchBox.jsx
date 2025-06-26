@@ -7,12 +7,13 @@ export default function SearchBox() {
     let [city, setCity] = useState("");
 
     const API_URL = "https://api.openweathermap.org/data/2.5/weather";
-    const API_KEY = "b2f28224a62b89d0625ad5d08fc6cd33";
+    const API_KEY = import.meta.env.VITE_API_KEY;
 
     const getWeatherInfo = async () => {
         let response = await fetch(`${API_URL}?q=${city}&appid=${API_KEY}`);
         let jsonResponse = await response.json();
         console.log(jsonResponse);
+        console.log(API_KEY);
         let result = {
             temperature: jsonResponse.main.temp,
             tempMin: jsonResponse.main.temp_min,
