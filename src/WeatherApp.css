@@ -1,0 +1,23 @@
+.weatherApp {
+    text-align: center;
+}
+
+.weather-container.cold {
+    background: linear-gradient(#a0c4ff, #d0f4ff);
+    color: #003366;
+}
+
+.weather-container.mild {
+    background: linear-gradient(#fef9c3, #fde68a);
+    color: #5b3700;
+}
+
+.weather-container.warm {
+    background: linear-gradient(#ffd6a5, #ffb347);
+    color: #7a2e00;
+}
+
+.weather-container.hot {
+    background: linear-gradient(#ff5e5e, #ff0000);
+    color: #ffffff;
+}
