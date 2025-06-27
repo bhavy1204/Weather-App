@@ -11,10 +11,11 @@ import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import WbCloudyIcon from '@mui/icons-material/WbCloudy';
 import WbTwilightIcon from '@mui/icons-material/WbTwilight';
 import BedtimeIcon from '@mui/icons-material/Bedtime';
+import { toPng } from 'html-to-image';
 
 export default function InfoBox({ info }) {
 
-    let init_img_url = "";
+    // const cardRef = useRef(null);
 
     const HOT_URl = "https://images.unsplash.com/photo-1504370805625-d32c54b16100?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
@@ -33,10 +34,20 @@ export default function InfoBox({ info }) {
         });
     }
 
+    const downloadCard = () => {
+        toPng(document.getElementById('weather-card'))
+            .then((dataUrl) => {
+                const link = document.createElement('a');
+                link.download = 'weather-card.png';
+                link.href = dataUrl;
+                link.click();
+            });
+    }
+
 
     return (
         <div className="infoBox">
-            <div className="classContainer">
+            <div className="classContainer" id="weather-card">
                 <Card sx={{ maxWidth: 345 }} >
                     <CardMedia
                         sx={{ height: 120 }}
@@ -70,8 +81,8 @@ export default function InfoBox({ info }) {
                     </CardContent>
                     <hr />
                     <CardActions className='cardActions'>
-                        <Button size="small">Share</Button>
-                        <Button size="small">Download card</Button>
+                        <Button size="small" >Share</Button>
+                        <Button size="small" onClick={downloadCard}>Download card</Button>
                     </CardActions>
                 </Card>
             </div>
