@@ -54,18 +54,18 @@ export default function SearchBox({ updateInfo }) {
 
     return (
         <div className='searchBox'>
-            <form onSubmit={handelSubmit}>
+            <form onSubmit={handelSubmit} className='searchForm'>
                 <TextField
+                    className="textField"
                     id="city"
                     label="City Name"
-                    variant="outlined"
+                    variant="standard"
                     value={city}
                     required
                     onChange={handelChange}
                 />
-                <br /> <br />
                 <Button variant="contained" type='submit' className='searchButton'>Search</Button>
-                {error && <Alert severity="error" sx={{width:'30%', margin:'auto'}}>No such place found in our API</Alert>}
+                {error && <Alert severity="error" sx={{ width: '30%', margin: 'auto' }}>No such place found in our API</Alert>}
             </form>
         </div>
     )

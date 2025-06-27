@@ -1,10 +1,10 @@
-.infoBox{
-    text-align: center;
+.infoBox {
+  text-align: center;
 }
 
-.classContainer{
-    display: flex;
-    justify-content: center;
+.classContainer {
+  display: flex;
+  justify-content: center;
 }
 
 .infoBox .MuiCard-root {
@@ -19,10 +19,28 @@
 }
 
 .infoBox .MuiCard-root p {
-    color: #f1f1f1;
+  color: #f1f1f1;
 }
 
 .MuiCard-root:hover {
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
   transform: scale(1.01);
+}
+
+/* Weather details inside card for icons aligment */
+.weatherDetails {
+  display: block;
+  text-align: center;
+}
+
+
+.weatherDetails p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.9;
+}
+
+.cardActions button{
+    color: wheat;
 }
