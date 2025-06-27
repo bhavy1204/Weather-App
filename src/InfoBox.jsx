@@ -12,10 +12,12 @@ import WbCloudyIcon from '@mui/icons-material/WbCloudy';
 import WbTwilightIcon from '@mui/icons-material/WbTwilight';
 import BedtimeIcon from '@mui/icons-material/Bedtime';
 import { toPng } from 'html-to-image';
+import { WhatsappShareButton, TwitterShareButton, FacebookShareButton } from "react-share";
+import { WhatsappIcon, TwitterIcon, FacebookIcon } from "react-share";
 
 export default function InfoBox({ info }) {
 
-    // const cardRef = useRef(null);
+    const currentPageUrl = window.location.href;
 
     const HOT_URl = "https://images.unsplash.com/photo-1504370805625-d32c54b16100?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
@@ -81,8 +83,12 @@ export default function InfoBox({ info }) {
                     </CardContent>
                     <hr />
                     <CardActions className='cardActions'>
-                        <Button size="small" >Share</Button>
-                        <Button size="small" onClick={downloadCard}>Download card</Button>
+                        <div className="socialMediaShareButton">
+                            <WhatsappShareButton url={currentPageUrl}> <WhatsappIcon size={27} round={true}></WhatsappIcon> </WhatsappShareButton> &nbsp;
+                            <FacebookShareButton url={currentPageUrl}> <FacebookIcon size={27} round={true}></FacebookIcon> </FacebookShareButton> &nbsp;
+                            <TwitterShareButton url={currentPageUrl}> <TwitterIcon size={27} round={true} ></TwitterIcon> </TwitterShareButton>
+                        </div>
+                        <Button size="small" onClick={downloadCard} id='downloadButton'>Download card</Button>
                     </CardActions>
                 </Card>
             </div>
