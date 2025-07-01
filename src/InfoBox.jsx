@@ -14,11 +14,15 @@ import BedtimeIcon from '@mui/icons-material/Bedtime';
 import { toPng } from 'html-to-image';
 import { WhatsappShareButton, TwitterShareButton, FacebookShareButton } from "react-share";
 import { WhatsappIcon, TwitterIcon, FacebookIcon } from "react-share";
+import { useState } from 'react';
 
 export default function InfoBox({ info }) {
 
     const currentPageUrl = window.location.href;
+    // To set dynaimc link to share buttons
+    const [uploadedImageUrl, setUploadedImageUrl] = useState("");
 
+    // static card Images url
     const HOT_URl = "https://images.unsplash.com/photo-1504370805625-d32c54b16100?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
     const COLD_URL = "https://images.unsplash.com/photo-1612119276551-be9efb8ea36a?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
@@ -26,6 +30,34 @@ export default function InfoBox({ info }) {
     const MILD_URL = "https://images.unsplash.com/photo-1638905132201-532d10903ea1?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
     const RAIN_URL = "https://images.unsplash.com/photo-1428592953211-077101b2021b?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+
+    // Cloudinary image uploadtion
+    const uploadToCloudinary = async (dataUrl) => {
+        const formData = new FormData();
+        formData.append("file", dataUrl);
+        formData.append("upload_preset", "weather_card_upload");
+
+        const res = await fetch("https://api.cloudinary.com/v1_1/dr2tagfk8/image/upload", {
+            method: "POST",
+            body: formData,
+        });
+
+        const data = await res.json();
+        return data.secure_url;
+
+    }
+
+    // For sharing actual card image 
+    const shareCardImage = () => {
+        const card = document.getElementById("weather-card");
+
+        toPng(card).then(async (dataUrl) => {
+            const uploadUrl = await uploadToCloudinary(dataUrl);
+            setUploadedImageUrl(uploadUrl);
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
 
     function convertUnixToTime(unixTime) {
         const date = new Date(unixTime * 1000);
@@ -83,11 +115,17 @@ export default function InfoBox({ info }) {
                     </CardContent>
                     <hr />
                     <CardActions className='cardActions'>
-                        <div className="socialMediaShareButton">
-                            <WhatsappShareButton url={currentPageUrl}> <WhatsappIcon size={27} round={true}></WhatsappIcon> </WhatsappShareButton> &nbsp;
-                            <FacebookShareButton url={currentPageUrl}> <FacebookIcon size={27} round={true}></FacebookIcon> </FacebookShareButton> &nbsp;
-                            <TwitterShareButton url={currentPageUrl}> <TwitterIcon size={27} round={true} ></TwitterIcon> </TwitterShareButton>
-                        </div>
+                        {uploadedImageUrl ? (
+                            <div className="socialMediaShareButton">
+                                <WhatsappShareButton url={uploadedImageUrl}> <WhatsappIcon size={27} round={true}></WhatsappIcon> </WhatsappShareButton>
+                                &nbsp;
+                                <FacebookShareButton url={uploadedImageUrl}> <FacebookIcon size={27} round={true}></FacebookIcon> </FacebookShareButton>
+                                &nbsp;
+                                <TwitterShareButton url={uploadedImageUrl}> <TwitterIcon size={27} round={true} ></TwitterIcon> </TwitterShareButton>
+                            </div>
+                        ) : (
+                            <button onClick={shareCardImage}>Share</button>
+                        )}
                         <Button size="small" onClick={downloadCard} id='downloadButton'>Download card</Button>
                     </CardActions>
                 </Card>
