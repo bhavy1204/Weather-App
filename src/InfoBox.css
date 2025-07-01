@@ -7,6 +7,17 @@
   justify-content: center;
 }
 
+.screenShot .MuiCard-root {
+  background-color: #111 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-radius: 20px;
+  border: 1px solid rgba(240, 240, 239, 0.5);
+  color: #ffffff;
+  transition: all 0.3s ease-in-out;
+  padding: 5px;
+}
+
 .infoBox .MuiCard-root {
   background: rgba(255, 255, 255, 0.07);
   backdrop-filter: blur(14px);
@@ -16,10 +27,22 @@
   border: 1px solid rgba(240, 240, 239, 0.5);
   color: #ffffff;
   transition: all 0.3s ease-in-out;
+  padding: 5px;
+}
+
+.screenShot .MuiCard-root p {
+  color: #f1f1f1;
 }
 
 .infoBox .MuiCard-root p {
   color: #f1f1f1;
+}
+
+.screenShot .MuiCard-root p,
+.screenShot .MuiCard-root h5,
+.screenShot .MuiCard-root span,
+.screenShot .weatherDetails p {
+  color: #fff !important;
 }
 
 .MuiCard-root:hover {
@@ -41,11 +64,19 @@
   line-height: 1.9;
 }
 
-.cardActions button{
-    color: wheat;
+.cardActions button {
+  color: wheat;
 }
 
-.cardActions{
-    display: flex;
-    justify-content: space-around;
+#uploadButton {
+  background-color: transparent;
+  color: wheat;
+  border: none;
+  font-size: 16px;
 }
+
+.cardActions {
+  display: flex;
+  justify-content: space-around;
+}
+

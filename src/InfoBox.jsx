@@ -21,6 +21,7 @@ export default function InfoBox({ info }) {
     const currentPageUrl = window.location.href;
     // To set dynaimc link to share buttons
     const [uploadedImageUrl, setUploadedImageUrl] = useState("");
+    const [screenShotMode, setScreenShotMode] = useState(false);
 
     // static card Images url
     const HOT_URl = "https://images.unsplash.com/photo-1504370805625-d32c54b16100?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
@@ -36,6 +37,7 @@ export default function InfoBox({ info }) {
         const formData = new FormData();
         formData.append("file", dataUrl);
         formData.append("upload_preset", "weather_card_upload");
+        formData.append("public_id", `${info.city}_weather_${Date.now()}`);
 
         const res = await fetch("https://api.cloudinary.com/v1_1/dr2tagfk8/image/upload", {
             method: "POST",
@@ -50,8 +52,9 @@ export default function InfoBox({ info }) {
     // For sharing actual card image 
     const shareCardImage = () => {
         const card = document.getElementById("weather-card");
-
+        setScreenShotMode(true);
         toPng(card).then(async (dataUrl) => {
+            setScreenShotMode(false);
             const uploadUrl = await uploadToCloudinary(dataUrl);
             setUploadedImageUrl(uploadUrl);
         }).catch((err) => {
@@ -80,7 +83,7 @@ export default function InfoBox({ info }) {
 
 
     return (
-        <div className="infoBox">
+        <div className={screenShotMode? "screenShot": "infoBox"}>
             <div className="classContainer" id="weather-card">
                 <Card sx={{ maxWidth: 345 }} >
                     <CardMedia
@@ -124,7 +127,7 @@ export default function InfoBox({ info }) {
                                 <TwitterShareButton url={uploadedImageUrl}> <TwitterIcon size={27} round={true} ></TwitterIcon> </TwitterShareButton>
                             </div>
                         ) : (
-                            <button onClick={shareCardImage}>Share</button>
+                            <button onClick={shareCardImage} id='uploadButton'>Share</button>
                         )}
                         <Button size="small" onClick={downloadCard} id='downloadButton'>Download card</Button>
                     </CardActions>
