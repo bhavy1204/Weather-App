@@ -83,8 +83,8 @@ export default function InfoBox({ info }) {
 
 
     return (
-        <div className={screenShotMode? "screenShot": "infoBox"}>
-            <div className="classContainer" id="weather-card">
+        <div className="classContainer">
+            < div className={screenShotMode ? "screenShot" : "infoBox"} id="weather-card" >
                 <Card sx={{ maxWidth: 345 }} >
                     <CardMedia
                         sx={{ height: 120 }}
@@ -132,7 +132,7 @@ export default function InfoBox({ info }) {
                         <Button size="small" onClick={downloadCard} id='downloadButton'>Download card</Button>
                     </CardActions>
                 </Card>
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }

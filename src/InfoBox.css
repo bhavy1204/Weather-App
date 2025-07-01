@@ -13,9 +13,13 @@
   -webkit-backdrop-filter: none !important;
   border-radius: 20px;
   border: 1px solid rgba(240, 240, 239, 0.5);
-  color: #ffffff;
+  color: #111;
   transition: all 0.3s ease-in-out;
   padding: 5px;
+}
+
+.screenShot .MuiCard-root *{
+  color: #111;
 }
 
 .infoBox .MuiCard-root {
@@ -31,7 +35,7 @@
 }
 
 .screenShot .MuiCard-root p {
-  color: #f1f1f1;
+  color: #111;
 }
 
 .infoBox .MuiCard-root p {
@@ -42,7 +46,7 @@
 .screenShot .MuiCard-root h5,
 .screenShot .MuiCard-root span,
 .screenShot .weatherDetails p {
-  color: #fff !important;
+  color: #111 !important;
 }
 
 .MuiCard-root:hover {
